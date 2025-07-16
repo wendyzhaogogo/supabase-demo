@@ -7,7 +7,7 @@ import { LeadsTable } from '@/components/tables/leads-table'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import { useGenerateMessageMutation } from '@/gql'
+import { apiService } from '@/lib/api'
 
 export function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([])
@@ -16,8 +16,7 @@ export function LeadsPage() {
   const [generatingLeadId, setGeneratingLeadId] = useState<string | null>(null)
   const [showForm, setShowForm] = useState(false)
 
-  // GraphQL hooks
-  const [generateMessage] = useGenerateMessageMutation()
+  // API service for AI message generation
 
   // Fetch leads from Supabase on component mount
   useEffect(() => {
@@ -80,25 +79,21 @@ export function LeadsPage() {
 
     setGeneratingLeadId(leadId)
     try {
-      // Use GraphQL mutation directly
-      const result = await generateMessage({
-        variables: {
-          input: {
-            name: lead.name,
-            role: lead.role,
-            company: lead.company,
-          },
-        },
+      // Use REST API to generate message
+      const result = await apiService.generateMessage({
+        name: lead.name,
+        role: lead.role,
+        company: lead.company,
       })
 
-      if (result.data?.generateMessage.message) {
+      if (result.success && result.data.message) {
         // Update the lead with the generated message in Supabase
         const { data, error } = await supabase
           .from('leads')
-          .update({
-            generated_message: result.data.generateMessage.message,
-            updated_at: new Date().toISOString(),
-          })
+                  .update({
+          generated_message: result.data.message,
+          updated_at: new Date().toISOString(),
+        })
           .eq('id', lead.id)
           .select()
           .single()

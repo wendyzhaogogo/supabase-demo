@@ -1,5 +1,0 @@
-mutation GenerateMessage($input: GenerateMessageInput!) {
-  generateMessage(input: $input) {
-    message
-  }
-} 

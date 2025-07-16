@@ -17,7 +17,7 @@
 - **TypeScript** - 类型安全
 - **Tailwind CSS** - 样式框架
 - **shadcn/ui** - UI组件库
-- **Apollo Client** - GraphQL客户端
+- **REST API** - 与AI服务通信
 - **Supabase** - 数据库连接
 
 ## 快速开始
@@ -33,7 +33,7 @@ cp .env.example .env.local
 # 启动开发服务器
 pnpm dev
 
-# 访问 http://localhost:3000
+# 访问 http://localhost:8000
 ```
 
 ## 环境变量
@@ -56,9 +56,6 @@ pnpm start        # 启动生产服务器
 pnpm lint         # 代码检查
 pnpm type-check   # 类型检查
 
-# GraphQL
-pnpm codegen      # 生成GraphQL类型和hooks
-
 # 工具
 pnpm clean        # 清理构建文件
 ```
@@ -73,9 +70,8 @@ src/
 │   ├── tables/      # 表格组件
 │   ├── pages/       # 页面组件
 │   └── ui/          # UI基础组件
-├── gql/             # GraphQL查询和突变
 ├── lib/             # 工具库
-│   ├── apollo.ts    # Apollo Client配置
+│   ├── api.ts       # REST API服务
 │   ├── supabase.ts  # Supabase客户端
 │   └── utils.ts     # 工具函数
 └── styles/          # 全局样式
@@ -103,6 +99,6 @@ src/
 
 - 所有组件都用TypeScript编写
 - 使用shadcn/ui组件系统
-- GraphQL代码自动生成
+- REST API集成
 - ESLint + Prettier代码规范
 - 支持热重载开发 

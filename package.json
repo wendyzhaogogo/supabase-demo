@@ -4,16 +4,14 @@
   "private": true,
   "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b",
   "scripts": {
-    "dev": "pnpm --parallel dev",
-    "build": "pnpm -r build",
-    "start": "pnpm --parallel start",
     "lint": "pnpm -r lint",
     "type-check": "pnpm -r type-check",
     "clean": "pnpm -r clean",
     "dev:frontend": "pnpm --filter frontend dev",
-    "dev:backend": "pnpm --filter backend dev",
+    "dev:ai-serverless": "pnpm --filter ai-serverless vercel:dev",
     "build:frontend": "pnpm --filter frontend build",
-    "build:backend": "pnpm --filter backend build"
+    "build:ai-serverless": "pnpm --filter ai-serverless vercel:build",
+    "deploy:ai-serverless": "pnpm --filter ai-serverless vercel:deploy"
   },
   "devDependencies": {
     "typescript": "^5.0.0"

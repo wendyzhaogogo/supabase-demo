@@ -12,8 +12,11 @@ const nextConfig: NextConfig = {
   // Configure trailing slash for static hosting
   trailingSlash: true,
   
-  // Configure asset prefix for CDN deployment
-  assetPrefix: '',
+  // Configure asset prefix for GitHub Pages
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/supabase-demo' : '',
+  
+  // Set base path for GitHub Pages
+  basePath: process.env.NODE_ENV === 'production' ? '/supabase-demo' : '',
 };
 
 export default nextConfig;
